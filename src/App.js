@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+import ProfilePageFunction from './ProfilePageFunction'
+import ProfilePageClass from './ProfilePageClass'
+
+export default class App extends React.Component {
+  state = {
+    user: 'Dan',
+  }
+  render() {
+    return (
+      <>
+        <label>
+          <b>Choose profile to view: </b>
+          <select
+            value={this.state.user}
+            onChange={(e) => this.setState({ user: e.target.value })}
+          >
+            <option value="Dan">Dan</option>
+            <option value="Sophie">Sophie</option>
+            <option value="Sunil">Sunil</option>
+          </select>
+        </label>
+        <h1>Welcome to {this.state.user}’s profile!</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <ProfilePageFunction user={this.state.user} />
+          <b> (function)</b>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <p>
+          <ProfilePageClass user={this.state.user} />
+          <b> (class)</b>
+        </p>
+        <p>Can you spot the difference in the behavior?</p>
+      </>
+    )
+  }
 }
-
-export default App;
